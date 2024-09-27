@@ -10,7 +10,7 @@ public class subwayCall {
 						"정평", "임당", "영남대"};
 	String startStation;
 	String destination;
-	int direction;
+
 	
 	subwayCall(String startStation, String destination) {
 		this.startStation = startStation;
@@ -31,15 +31,16 @@ public class subwayCall {
 				System.out.print("출발역을 입력해주세요 > ");
 				this.startStation = scanner.nextLine();
 				System.out.println("1.영남대 방향 \t 2.반월당 방향");
-				this.direction = Integer.parseInt(scanner.nextLine());
-				run(this.startStation, this.direction);
+				this.destination = scanner.nextLine();
+				
+				run(this.startStation, this.destination);
 			} else {
 				System.out.println("프로그램을 종료합니다.");
 			}
 			
 		}
 	}
-	void run(String startStation, int direction) {
+	void run(String startStation, String destination) {
 		
 	}
 }
