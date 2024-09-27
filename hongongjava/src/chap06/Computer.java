@@ -20,11 +20,11 @@ public class Computer {
 		return sum;
 	}
 	
-	int sum3(int[][] values) {
-		int sum = 0;
-		for(int i=0; i<values.length; i++) {
-			for(int j : )
-		}
-		return sum;
-	}
+//	int sum3(int[][] values) {
+//		int sum = 0;
+//		for(int i=0; i<values.length; i++) {
+//			for(int j : )
+//		}
+//		return sum;
+//	}
 }

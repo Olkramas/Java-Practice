@@ -18,6 +18,33 @@ public class CarMain {
 		
 		myCar.color = "흰색";
 		System.out.println("바뀐 색깔: " + myCar.color);
+		
+		
+		System.out.println("----------------------\n");
+		//교재 p279
+		myCar.setGas(5);
+		
+		boolean gasState = myCar.isLeftGas();
+		//gasState가 true면 출발하는거
+		if(gasState) {
+			System.out.println("출발합니다.");
+			myCar.run();
+		}
+		
+		if(myCar.isLeftGas()) {
+			System.out.println("gas를 주입할 필요가 없습니다.");
+		} else {
+			//false가 리턴된 경우
+			System.out.println("gas를 주입하세요.");
+		}
+		
+		//교재 p284
+		System.out.println("\n교재 284p-----------------------------\n");
+		myCar.keyTurnOn();
+		myCar.run2();
+		
+		int speed = myCar.getSpeed();
+		System.out.println("현재 속도: " + speed + "km/h");
 	}
 
 }
