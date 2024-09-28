@@ -20,13 +20,13 @@ public class SubwayCall {
 	
 	//메뉴 출력 메소드. 입력 / 종료 두가지 기능을 가지고 있음.
 	void menu() {
-		System.out.println("메뉴를 선택해주세요.");
 		while(true) {
 			int startNum = 0;
 			int destiNum = 0;
 			
-			System.out.println("-----------------------------");
-			System.out.println("1.출발/도착역 입력하기\n2.대구 지하철 2호선 노선도 보기\n3.종료");
+			System.out.println("----------------------------");
+			System.out.println("     **메뉴를 선택해주세요.**");
+			System.out.println("  1.출발/도착역 입력하기\n  2.대구 지하철 2호선 노선도 보기\n  3.종료");
 			System.out.println("-----------------------------");
 			int firstMenu = Integer.parseInt(scanner.nextLine());
 			
@@ -54,8 +54,9 @@ public class SubwayCall {
 						}
 					}
 					
-					System.out.println(this.startStation + "에서 출발합니다.");
-					System.out.println("도착역 전 역에서 알림을 드리겠습니다.");
+					System.out.println("\n" + this.startStation + "에서 출발합니다.");
+					System.out.println("도착역 전 역에서 알림을 드리겠습니다.\n");
+					System.out.println("------------------------");
 					run(startNum, destiNum);
 					return;
 				case 2:
@@ -82,15 +83,15 @@ public class SubwayCall {
 			
 			//문양행
 			if(startStation > destination) {
-				System.out.println("----------------------");
+
 				for(int i=startStation; i>destination+1; i--) {
 					int random = (int) (Math.random()* 1000 + 501);
 					count++;
 					try {
 						Thread.sleep(random);
-						System.out.println("\n이번역은 " + this.station[i-1] + "역 입니다.");
-						System.out.println("도착까지 남은 역 수: " + (startStation - destination - count));
-						System.out.println("\n----------------------");
+						System.out.println("\n  ==이번역은 " + this.station[i-1] + "역 입니다==");
+						System.out.println("   도착까지 남은 역 수: " + (startStation - destination - count));
+						System.out.println("\n------------------------");
 					} catch (InterruptedException e) {
 						System.out.println("오류가 발생했습니다. \n고객센터에 문의 바랍니다.");
 					}
@@ -104,9 +105,9 @@ public class SubwayCall {
 					count++;
 					try {
 						Thread.sleep(random);
-						System.out.println("\n이번역은 " + this.station[i+1] + "역 입니다.");
-						System.out.println("도착까지 남은 역 수: " + (destination - startStation - count));
-						System.out.println("\n----------------------");
+						System.out.println("\n  ==이번역은 " + this.station[i+1] + "역 입니다==");
+						System.out.println("   도착까지 남은 역 수: " + (destination - startStation - count));
+						System.out.println("\n------------------------");
 					} catch (InterruptedException e) {
 						System.out.println("오류가 발생했습니다. \n고객센터에 문의 바랍니다.");
 					}
@@ -121,10 +122,15 @@ public class SubwayCall {
 	}
 	
 	void notice() {
-		System.out.println("\n*************************");
-		System.out.println("다음은 도착역인 " + this.destination + "역 입니다."); 
-		System.out.println("서비스를 이용해주셔서 감사합니다. \n프로그램을 종료합니다.");
-		System.out.println("*************************\n");
+		try {
+			Thread.sleep(1000);
+			System.out.println("\n*************************");
+			System.out.println(" 다음은 도착역인 " + this.destination + "역 입니다"); 
+			System.out.println(" 서비스를 이용해주셔서 감사합니다. \n 프로그램을 종료합니다.");
+			System.out.println("*************************\n");
+		} catch(InterruptedException e) {
+			System.out.println("오류가 발생했습니다. \n고객센터에 문의 바랍니다.");
+		}
 	}
 	
 	void showSation() {
