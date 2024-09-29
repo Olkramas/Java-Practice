@@ -20,7 +20,8 @@ public class SubwayCall {
 	
 	//메뉴 출력 메소드. 입력 / 종료 두가지 기능을 가지고 있음.
 	void menu() {
-		while(true) {
+		boolean stopMenu = true;
+		while(stopMenu) {
 			int startNum = 0;
 			int destiNum = 0;
 			
@@ -58,15 +59,17 @@ public class SubwayCall {
 					System.out.println("도착역 전 역에서 알림을 드리겠습니다.\n");
 					System.out.println("------------------------");
 					run(startNum, destiNum);
-					return;
+					stopMenu = false;
+					break;
 				case 2:
 					showSation();
 					break;
 				case 3:
 					System.out.println("이용해주셔서 감사합니다\n프로그램을 종료합니다.");
-					return;
+					stopMenu = false;
+					break;
 				default: 
-					System.out.println("오류가 발생했습니다. \n고객센터에 문의 바랍니다.");
+					System.out.println("잘못된 선택입니다 \n메뉴로 돌아갑니다. \n");
 					
 			}
 		}
@@ -78,7 +81,8 @@ public class SubwayCall {
 	//매개변수로 출발역, 도착역의 인덱스 번호를 받았음.
 	void run(int startStation, int destination) {
 		int count = 0;
-		while(true) {
+		boolean runForStop = true;
+		while(runForStop) {
 			//만약 출발역의 인덱스 번호가 도착역의 인덱스 번호보다 크다면, 문양행 작다면 영대행, 같을경우 오류 다시시작하기
 			
 			//문양행
@@ -97,14 +101,14 @@ public class SubwayCall {
 					}
 				}
 				notice();
+				runForStop = false;
 				break;
 			//영대행
 			} else if(startStation < destination) {
 				for(int i=startStation; i<destination-1; i++) {
-					int random = (int) (Math.random()* 1000 + 501);
 					count++;
 					try {
-						Thread.sleep(random);
+						Thread.sleep(1000);
 						System.out.println("\n  ==이번역은 " + this.station[i+1] + "역 입니다==");
 						System.out.println("   도착까지 남은 역 수: " + (destination - startStation - count));
 						System.out.println("\n------------------------");
@@ -113,9 +117,11 @@ public class SubwayCall {
 					}
 				}
 				notice();
+				runForStop = false;
 				break;
 			} else {
-				System.out.println("오류입니다 처음부터 다시 시작하세요.");
+				System.out.println("잘못된 입력입니다 \n프로그램을 다시 시작합니다.");
+				runForStop = false;
 				menu();
 			}
 		}
@@ -125,8 +131,9 @@ public class SubwayCall {
 		try {
 			Thread.sleep(1000);
 			System.out.println("\n*************************");
-			System.out.println(" 다음은 도착역인 " + this.destination + "역 입니다"); 
-			System.out.println(" 서비스를 이용해주셔서 감사합니다. \n 프로그램을 종료합니다.");
+			System.out.println(" 다음은 도착역인 \"" + this.destination + "\"역 입니다\n"); 
+			System.out.println(" 내릴실 때 차안에 두고내리는\n 물건이 없는지 다시 한번 확인하세요\n");
+			System.out.println(" 서비스를 이용해주셔서 감사합니다 \n 프로그램을 종료합니다.");
 			System.out.println("*************************\n");
 		} catch(InterruptedException e) {
 			System.out.println("오류가 발생했습니다. \n고객센터에 문의 바랍니다.");
