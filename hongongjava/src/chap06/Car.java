@@ -5,25 +5,63 @@ public class Car {
 	String company = "현대자동차";
 	String model = "그랜저";
 	String color = "검정";
-	int maxSpeed = 300;
-	int speed;
-	int gas;
+	private int maxSpeed = 300;
+	private int speed;
+	private int gas;
+	private boolean gasState;
+	//boolean은 기본값이 false임.
+	private boolean stop;
 	
 	
 	//생성자
 	
-	//메소드
-	void setGas(int gas) {
-		this.gas = gas;
+	public boolean isStop() {
+		return stop;
 	}
-	
-	
-	//필드를 외부에서 바꿀수 없게 만듦 보통은(정보 보호기능) 그래서 getter setter메소드가 필요하게 됨.
+
+	public void setStop(boolean stop) {
+		speed = 0;
+		this.stop = stop;
+	}
+
+	//메소드
 	public int getSpeed() {
 		return speed;
 	}
 	
+	public void setSpeed(int speed) {
+		if(speed < 0) {
+			this.speed = 0;
+			return;		//메소드 종료
+		} 
+		this.speed = speed;
+	}
 	
+	public int getGas() {
+		return gas;
+	}
+	
+	public void setGas(int gas) {
+		this.gas = gas;
+	}
+	
+	public int getMaxSpeed() {
+		return maxSpeed;
+	}
+	
+	public void setMaxSpeed(int maxSpeed) {
+		this.maxSpeed = maxSpeed;
+	}
+	
+	//boolean 타입일 때 get은 is를 붙이는게 관례임.
+	public boolean isGasState() {
+		return gasState;
+	}
+
+	public void setGasState(boolean gasState) {
+		this.gasState = gasState;
+	}
+
 	//gas가 있는지 없는지 확인하는 메소드
 	boolean isLeftGas() {
 		if(gas == 0) {
@@ -34,6 +72,7 @@ public class Car {
 		return true;
 	}
 	
+
 	void run() {
 		while(true) {
 			if(gas > 0) {

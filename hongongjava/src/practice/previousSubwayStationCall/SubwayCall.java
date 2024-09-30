@@ -59,15 +59,13 @@ public class SubwayCall {
 					System.out.println("도착역 전 역에서 알림을 드리겠습니다.\n");
 					System.out.println("------------------------");
 					run(startNum, destiNum);
-					stopMenu = false;
-					break;
+					return;
 				case 2:
 					showSation();
 					break;
 				case 3:
 					System.out.println("이용해주셔서 감사합니다\n프로그램을 종료합니다.");
-					stopMenu = false;
-					break;
+					return;
 				default: 
 					System.out.println("잘못된 선택입니다 \n메뉴로 돌아갑니다. \n");
 					
@@ -102,7 +100,6 @@ public class SubwayCall {
 				}
 				notice();
 				runForStop = false;
-				break;
 			//영대행
 			} else if(startStation < destination) {
 				for(int i=startStation; i<destination-1; i++) {
@@ -118,7 +115,6 @@ public class SubwayCall {
 				}
 				notice();
 				runForStop = false;
-				break;
 			} else {
 				System.out.println("잘못된 입력입니다 \n프로그램을 다시 시작합니다.");
 				runForStop = false;

@@ -19,7 +19,18 @@ public class ArrayMemo {
 		double avg = (double) sum / arr3.length;
 		//출력하기
 		System.out.printf("총합 : %d, 평균 : %.2f", sum, avg);
-
+		
+		System.out.println();
+		
+		int[] arr4;
+		arr4 = new int[3];
+		System.out.println(arr4.length);
+		
+		String[] arr5;
+		arr5 = new String[5];
+		System.out.println(arr5.length);
+		
+		
 	}
 
 }
