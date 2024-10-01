@@ -3,15 +3,16 @@ package 최태백.Account;
 import java.util.Scanner;
 
 public class AccountMain {
-
+	
+	static int count = 0;
+	
+	// 배열 선언
+	static Account[] bank = new Account[100];
+	
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 
-		// 배열 선언
-		Account[] bank = new Account[100];
-
-		int count = 0;
-
+		
 		boolean run = true;
 
 		while (run) {
@@ -30,12 +31,18 @@ public class AccountMain {
 					if (bank[count] == null && count <= 100) {
 						System.out.println("계좌번호: ");
 						String ano = scanner.nextLine();
-//						for(int i=0; i<count-1; i++) {
-//							if(!bank[i].getAno().equals(ano)) {
-//								System.out.println("계좌번호 중복입니다. 초기화면으로 돌아갑니다.");
-//								break;
-//							}
-//						}
+						System.out.println(ano);
+						//계좌가 존재한다면 1이 리턴되는 noRepetition메소드를 통해 계좌의 중복을 피함.
+						if(noRepetition(ano) == 1) {
+							System.out.println("계좌번호 중복입니다. 초기화면으로 돌아갑니다.");
+							break;
+						}
+						
+						//trim().은 입력받은 문자열 양 옆 공백을 없앰 isEmpty()는 공백(스페이스, 탭, 엔터)이 있으면 true를 리턴함.
+						if(ano.trim().isEmpty()) {
+							System.out.println("공백을 입력하셨습니다 계좌번호를 입력하세요.");
+							break;
+						}
 
 						System.out.println("계좌 주: ");
 						String owner = scanner.nextLine();
@@ -66,22 +73,29 @@ public class AccountMain {
 
 				System.out.println("계좌번호: ");
 				String checkAno = scanner.nextLine();
+				if(noRepetition(checkAno) != 1) {
+					System.out.println("계좌번호를 확인하세요.");
+				}
+				
 				for (int i = 0; i < count; i++) {
 					if (bank[i].getAno().equals(checkAno)) {
 						System.out.println("예금액: ");
 						int inputM = Integer.parseInt(scanner.nextLine());
+						
 						if (bank[i].getBalence() + inputM <= Account.MAX_BALANCE) {
 							bank[i].setBalence(bank[i].getBalence() + inputM);
 							System.out.println("예금을 성공했습니다.");
 						} else {
-							System.out.println("통장 잔고가 1,000,000원을 초과했습니다.");
+							System.out.println("통장 잔고가 1,000,000원을 초과합니다. \n메뉴로 돌아갑니다.");
 						}
-
+						
 					}
-					if (i == count-1) {
-						System.out.println("계좌번호를 확인해주세요.");
-					}
+//					if (i+1 == count) {
+//						System.out.println("계좌번호를 확인해주세요.");
+//						break;
+//					}
 				}
+				
 				break;
 			case 4:
 				System.out.println("---------------");
@@ -90,6 +104,10 @@ public class AccountMain {
 
 				System.out.println("계좌번호: ");
 				String checkAno1 = scanner.nextLine();
+				if(noRepetition(checkAno1) != 1) {
+					System.out.println("계좌번호를 확인하세요.");
+				}
+				
 				for (int i = 0; i < count; i++) {
 					if (bank[i].getAno().equals(checkAno1)) {
 						System.out.println("출금액: ");
@@ -101,9 +119,11 @@ public class AccountMain {
 							System.out.println("통장 잔액이 부족합니다.");
 						}
 					}
-					if (i == count-1) {
-						System.out.println("계좌번호를 확인해주세요.");
-					}
+					
+//					if (i+1 == count) {
+//						System.out.println("계좌번호를 확인해주세요.");
+//						break;
+//					}
 				}
 				break;
 			case 5:
@@ -113,6 +133,18 @@ public class AccountMain {
 			default:
 			}
 		}
+	}
+	
+	//중복을 피하기 위한 메소드
+	static int noRepetition(String ano) {
+		int noRe = 0;
+		for(int i=0; i<count; i++) {
+			if(bank[i].getAno().equals(ano)) {
+				//만약 같은 계좌번호가 있다면 1이 리턴됨.
+				noRe++;
+			}
+		}
+		return noRe;
 	}
 
 }

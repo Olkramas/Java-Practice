@@ -1,4 +1,4 @@
-package chap07.page377;
+package chap07.page37720241001;
 
 public class MemberService extends Service {
 	

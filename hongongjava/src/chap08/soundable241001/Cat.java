@@ -1,4 +1,4 @@
-package chap08.soundable;
+package chap08.soundable241001;
 
 public class Cat implements Soundable{
 

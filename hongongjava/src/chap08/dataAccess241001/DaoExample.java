@@ -1,4 +1,4 @@
-package chap08.dataAccess;
+package chap08.dataAccess241001;
 
 public class DaoExample {
 	public static void dbWork(DataAccessObject dao) {
