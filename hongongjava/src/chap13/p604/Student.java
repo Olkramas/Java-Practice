@@ -11,14 +11,14 @@ public class Student {
 	
 	@Override
 	public int hashCode() {
-		return name.hashCode() + studentNum;
+		return studentNum;
 	}
 	
 	@Override
 	public boolean equals(Object obj) {
 		if(obj instanceof Student) {
 			Student student = (Student) obj;
-			return student.name.equals(name) && (student.studentNum == studentNum);
+			return (student.studentNum == studentNum);
 		} else {
 			return false;
 		}
