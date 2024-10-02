@@ -28,7 +28,7 @@ public class AccountMain {
 				System.out.println("계좌생성");
 
 				while (true) {
-					if (bank[count] == null && count <= 100) {
+					if (bank[count] == null && count < 100) {
 						System.out.println("계좌번호: ");
 						String ano = scanner.nextLine();
 						System.out.println(ano);
@@ -49,6 +49,11 @@ public class AccountMain {
 
 						System.out.println("초기 금액 입력");
 						int balence = Integer.parseInt(scanner.nextLine());
+						
+						if(balence < Account.MIN_BALANCE || balence > Account.MAX_BALANCE) {
+							 System.out.println("초기값은 0보다 커야하고 1,000,000원 보다 작아야합니다.");
+							 break;
+						}
 
 						bank[count] = new Account(ano, owner, balence);
 
@@ -90,6 +95,7 @@ public class AccountMain {
 						}
 						
 					}
+					
 //					if (i+1 == count) {
 //						System.out.println("계좌번호를 확인해주세요.");
 //						break;
