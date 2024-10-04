@@ -17,6 +17,17 @@ public class AccountMainUseHashSet {
 		return false;
 	}
 	
+	static int a(Set<Account> accountSet, String ano) {
+		int count = 0;
+		for(Account ele : accountSet) {
+			if(ele.getAno().equals(ano)) {
+				count++;
+				break;
+			}
+		}
+		return count;
+	}
+	
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		
@@ -42,7 +53,6 @@ public class AccountMainUseHashSet {
 			switch (menuNum) {
 			case 1:
 				System.out.println("***계좌생성***\n");
-
 				while (true) {
 					System.out.println("계좌번호 > ");
 					String ano = scanner.nextLine();
@@ -52,10 +62,29 @@ public class AccountMainUseHashSet {
 						break;
 					}
 					
-					if(noRe(accountSet, ano) == true) {
+//					if(noRe(accountSet, ano) == true) {
+//						System.out.println("계좌번호 중복입니다 \n초기 화면으로 돌아갑니다.\n");
+//						break;
+//					}
+					
+					if(a(accountSet, ano) == 1) {
 						System.out.println("계좌번호 중복입니다 \n초기 화면으로 돌아갑니다.\n");
 						break;
 					}
+					
+					//다른방법
+//					int count = 0;
+//					for(Account ele : accountSet) {
+//						if(ele.getAno().equals(ano)) {
+//							count++;
+//							break;
+//						}
+//					}
+//					
+//					if(count == 1) {
+//						System.out.println("계좌번호 중복입니다 \n초기 화면으로 돌아갑니다.\n");
+//						break;
+//					}
 					
 					System.out.println("계좌주 > ");
 					String owner = scanner.nextLine();
@@ -67,10 +96,12 @@ public class AccountMainUseHashSet {
 						 System.out.println("초기값은 0보다 커야하고 1,000,000원 보다 작아야합니다.\n");
 						 break;
 					}
-
-					accountSet.add(new Account(ano, owner, balence));
-
-					System.out.println("계좌가 생성되었습니다.\n");
+					if(accountSet.size() == 100) {
+						System.out.println("더이상 만들 수 없습니다.");
+					} else {
+						accountSet.add(new Account(ano, owner, balence));
+						System.out.println("계좌가 생성되었습니다.\n");
+					}
 					break;
 				}
 				break;
@@ -160,7 +191,7 @@ public class AccountMainUseHashSet {
 				int inputNum = Integer.parseInt(scanner.nextLine());
 				
 				
-				//for문으로 바로 삭제하면 예외가 생김. 이터레이터의 참조를 삭제하면 오류없이 삭제가능.
+				//for문으로 바로 삭제하면 예외가 생김. 이터레이터를 삭제하면 오류없이 삭제가능.
 				//concurrentmodificationexception
 				Iterator<Account> accIr = accountSet.iterator();
 				boolean retry = true;
