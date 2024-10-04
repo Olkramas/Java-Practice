@@ -1,9 +1,10 @@
 package bookManagement;
 
-import java.sql.Connection;
-
 public class Book {
-Connection conn = null;
+	private String title;
+	private String writer;
+	private String bookNum;
+	private int bookPrice;
 	
 	public Book() {};
 	public Book(String title, String writer, String bookNum, int bookPrice) {
@@ -11,6 +12,12 @@ Connection conn = null;
 		this.writer = writer;
 		this.bookNum = bookNum;
 		this.bookPrice = bookPrice;
+	}
+	
+	
+	@Override
+	public String toString() {
+		return title + " | " + writer + " | " + bookPrice + " | " + bookNum;
 	}
 	public String getTitle() {
 		return title;
@@ -36,10 +43,7 @@ Connection conn = null;
 	public void setBookPrice(int bookPrice) {
 		this.bookPrice = bookPrice;
 	}
-	private String title;
-	private String writer;
-	private String bookNum;
-	private int bookPrice;
+
 	
 	
 }

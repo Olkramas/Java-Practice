@@ -61,7 +61,6 @@ public class UpdateMain {
 					conn.close();
 					System.out.println("연결끊기");
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

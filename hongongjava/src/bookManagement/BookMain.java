@@ -1,7 +1,7 @@
 package bookManagement;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class BookMain {
@@ -17,10 +17,9 @@ public class BookMain {
 	//필드 외부 접근 막기 - getter/setter
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
-		List<Book> booklist = new ArrayList<>();
+		Book book;
 		BookDao dao = new BookDao();
-		//됐다 안됐다 판단하기 위해 만들었음.
-		int cnt = 0;
+		Connection conn = null;
 		
 		boolean run = true;
 		
@@ -31,7 +30,6 @@ public class BookMain {
 			System.out.print("메뉴 이동 > ");
 			int menuNum = Integer.parseInt(scanner.nextLine());
 			
-			dao.connect();
 			
 			switch(menuNum) {
 			case 1:
@@ -46,37 +44,105 @@ public class BookMain {
 				System.out.println("책 번호를 입력하세요 > ");
 				String bookNum = scanner.nextLine();
 				
-				booklist.add(new Book(title, writer, bookNum, bookPrice));
-				dao.insert();
-				System.out.println("입력이 완료되었습니다.");
 				
-//				for(BookDao ele : booklist) {
-//					ele.connect(menuNum);
-//					//int cnt로 값 받아서 1또는 0으로 받아서 성공했는지 실패했는지까지 구현해야됨.
-//				}
+				try {
+					conn = dao.getConn();
+					System.out.println("연결성공");
+					book = new Book(title, writer, bookNum, bookPrice);
+					
+					//데이터 입력
+					int rows = dao.insert(conn, book);
+					if(rows > 0) {
+						System.out.println("저장 성공");
+					} else {
+						System.out.println("저장 실패");
+					}
+				} catch (ClassNotFoundException | SQLException e) {
+					e.printStackTrace();
+				} finally {
+					dao.closeConn(conn);
+				}
 
 				break;
 			case 2:
 				//도서검색 책 제목으로 검색
 				System.out.println("검색할 책 제목을 입력하세요");
 				String titleForCondition= scanner.nextLine();
-				
-				
-//				Iterator<BookDao> bookIr = booklist.iterator();
-//				while(bookIr.hasNext()) {
-//					boolean checkTitle = bookIr.next().getTitle().equals(titleForCondition);
-//					if(checkTitle == true) {
-//						bookIr.
-//					}
-//				}
+				try {
+					conn = dao.getConn();
+					System.out.println("연결성공");
+					int rows = dao.selectWhere(conn, titleForCondition);
+					if(rows > 0) {
+						System.out.println("가져오기 성공");
+					} else {
+						System.out.println("가져오기 실패");
+					}
+					
+				} catch (ClassNotFoundException | SQLException e) {
+					e.printStackTrace();
+				}
 				break;
 			case 3:
 				//도서전체 조회
+				System.out.println("전체 도서 목록을 조회합니다.");
+
+				try {
+					conn = dao.getConn();
+					System.out.println("연결성공");
+					
+					int rows = dao.selectAll(conn);
+					if(rows > 0) {
+						System.out.println("가져오기 성공");
+					} else {
+						System.out.println("가져오기 실패");
+					}
+				} catch (ClassNotFoundException | SQLException e) {
+					e.printStackTrace();
+				}
+				break;
 			case 4:
 				//도서 삭제 책번호 받기
+				System.out.println("[도서삭제]");
+				System.out.println("삭제할 책의 isbn코드를 입력하세요 > ");
+				String inputIsbn = scanner.nextLine();
+				
+				try {
+					conn = dao.getConn();
+					System.out.println("연결성공");
+					int rows = dao.delete(conn, inputIsbn);
+					if(rows > 0) {
+						System.out.println("삭제 성공");
+					} else {
+						System.out.println("삭제 실패");
+					}
+				} catch (ClassNotFoundException | SQLException e) {
+					e.printStackTrace();
+				}
+				break;
 			case 5:
 				//도서정보변경
 				//책제목 : 변경할 책번호, 변경할 책 가격입력 => 수정
+				System.out.println("[도서 정보 변경]");
+				System.out.println("변경할 책의 제목을 입력하세요 > ");
+				String inputTitle = scanner.nextLine();
+				
+				System.out.println("변경할 책 번호를 입력하세요 > ");
+				String changeIsbn = scanner.nextLine();
+				
+				System.out.println("변경할 가격을 입력하세요 > ");
+				int changePrice = Integer.parseInt(scanner.nextLine());
+				
+				try {
+					int rows = dao.update(conn, inputTitle, changeIsbn, changePrice);
+					if(rows > 0) {
+						System.out.println("변경 성공");
+					} else {
+						System.out.println("변경 실패");
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				break;
 			case 6:
 				System.out.println("프로그램을 종료합니다.");
 				run = false;
