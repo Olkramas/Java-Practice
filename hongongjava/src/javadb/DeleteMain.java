@@ -37,10 +37,8 @@ public class DeleteMain {
 			pstmt.close();
 					
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			if(conn != null) {
@@ -48,7 +46,6 @@ public class DeleteMain {
 					conn.close();
 					System.out.println("연결끊기");
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				

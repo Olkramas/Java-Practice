@@ -71,11 +71,9 @@ public class InsertMain {
 				
 				pstmt.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			if(conn != null) {
@@ -84,7 +82,6 @@ public class InsertMain {
 					conn.close();
 					System.out.println("연결끊기");
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

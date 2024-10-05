@@ -30,7 +30,7 @@ public class SelectMain {
 			
 			
 			PreparedStatement pstmt = conn.prepareStatement(spl);
-			pstmt.setString(1, "글쓴이4");
+			pstmt.setString(1, "최태백");
 			
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
