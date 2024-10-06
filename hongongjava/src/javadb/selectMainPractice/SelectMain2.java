@@ -57,9 +57,9 @@ public class SelectMain2 {
 			bd.setBdate(rs.getDate(5));
 			
 			System.out.println(bd);
-			rs.close();
-			pstmt.close();
 		}
+		rs.close();
+		pstmt.close();
 	} catch (SQLException e) {
 		e.printStackTrace();
 	} finally {		

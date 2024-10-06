@@ -9,7 +9,7 @@ public class Account {
 	private int count;
 	
 	
-
+	public Account() {};
 	public Account(String ano, String owner, int balence) {
 		this.ano = ano;
 		this.owner = owner;

@@ -37,6 +37,12 @@ public class BookMain {
 				System.out.println("[도서등록]");
 				System.out.println("책 제목을 입력하세요 > ");
 				String title = scanner.nextLine();
+				String checkTitle = dao.noRe(conn, title);
+				if(title.equals(checkTitle)) {
+					System.out.println("중복된 책 제목입니다.\n메뉴로 돌아갑니다.");
+					break;
+				}
+				
 				System.out.println("저자를 입력하세요 > ");
 				String writer = scanner.nextLine();
 				System.out.println("책 가격을 입력하세요 > ");

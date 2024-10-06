@@ -34,7 +34,7 @@ public class UpdateMain {
 			
 			int rows = pstmt.executeUpdate();
 			System.out.println("수정된 갯수 : " + rows);
-//			if(rows == 1) {
+//			if(rows == 1) {    
 //				ResultSet rs = pstmt.getGeneratedKeys();
 //				if(rs.next()) {
 //					int bno = rs.getInt("bno");

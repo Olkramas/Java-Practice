@@ -32,6 +32,29 @@ public class BookDao {
 		}
 	}
 	
+	public String noRe(Connection conn, String title) {
+		
+		try {
+			conn = getConn();
+			
+			String sql = "" +
+					 "select title " +
+				     "from   book ";
+			
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Book bd = new Book();
+				return rs.getString(1);
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConn(conn);
+		}
+		return null;
+		
+	}
 	
 	//3.insert메소드
 	public int insert(Connection conn, Book book) throws SQLException {
